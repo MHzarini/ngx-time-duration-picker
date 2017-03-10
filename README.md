@@ -31,8 +31,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-// Import your library
-import { SampleModule } from 'angular2-time-duration-picker';
+// Import the library
+import { TimeDurationPickerModule } from 'angular2-time-duration-picker';
 
 @NgModule({
   declarations: [
@@ -49,16 +49,20 @@ import { SampleModule } from 'angular2-time-duration-picker';
 export class AppModule { }
 ```
 
-Once your library is imported, you can use its components, directives and pipes in your Angular application:
+Once your library is imported, you can use its components in your Angular application:
 
-```xml
-<!-- You can now use your library component in app.component.html -->
-<h1>
-  {{title}}
-</h1>
-<sampleComponent></sampleComponent>
+Add the `time-duration-picker` component to the page where you want to use the picker.
+```html
+<time-duration-picker [inputDisabled]=false units="Week | Day | Hour | Minute | Second | Millisecond" returnedValueUnit="Second" (onChange)="onNumberChanged($event)"></time-duration-picker>
+
 ```
-
+## Field Schema
+| Attribute        | Type           | Required  | Description |
+| :------------- |:-------------| :-----:| :-----|
+| units | [input] String | Yes | The units of the picker. pipe `|` seprated |
+| returnedValueUnit | [input] String | No | The unit of returned Value. second by default |
+inputDisabled | [input] Boolean | No | Defines if the input input should be disabled / editable by the user. true by default |
+| onChange | (output) Number | No | The onChange event of the component. Emits the value of the number picker, every time the user has clicked the - or + button. |
 ## Development
 
 To generate all `*.js`, `*.js.map` and `*.d.ts` files:
