@@ -3,7 +3,8 @@
 
 A generic time duration picker Angular component (v. 2.0.0+) for Twitter Bootstrap
 
-![](https://raw.githubusercontent.com/MHzarini/angular2-time-duration-picker/master/docs/images/example.png)
+
+![](https://raw.githubusercontent.com/MHzarini/angular2-time-duration-picker/master/docs/img/example.png)
 
 ## Installation
 
@@ -14,7 +15,7 @@ $ npm install angular2-time-duration-picker --save
 ```
 
 ## Requirements ##
-* [Angular](https://angular.io) (2.0.0+)
+* [Angular](https://angular.io) [![npm version](https://badge.fury.io/js/%40angular%2Fcore.svg)](https://badge.fury.io/js/%40angular%2Fcore)
 
 ## UI Dependency ##
 * [Twitter Bootstrap](http://getbootstrap.com) (3.3.5+)
