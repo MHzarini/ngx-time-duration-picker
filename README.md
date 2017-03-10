@@ -1,4 +1,9 @@
+[![npm version](https://badge.fury.io/js/angular2-time-duration-picker.svg)](https://badge.fury.io/js/angular2-time-duration-picker)
 # angular2-time-duration-picker
+
+A generic time duration picker Angular component (v. 2.0.0+) for Twitter Bootstrap
+
+![](https://raw.githubusercontent.com/MHzarini/angular2-time-duration-picker/master/docs/images/example.png)
 
 ## Installation
 
@@ -14,11 +19,6 @@ $ npm install angular2-time-duration-picker --save
 ## UI Dependency ##
 * [Twitter Bootstrap](http://getbootstrap.com) (3.3.5+)
 
-## Installation ##
-
-```
-npm install angular2-number-picker -save
-```
 ## usage ##
 Import the TimeDurationPickerComponent in your `app.module` and add it to the declarations array.
 Alternatively, you can import the TimeDurationPickerComponent to a shared module, to make it available across all modules in your Angular application.
