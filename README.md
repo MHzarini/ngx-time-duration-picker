@@ -52,31 +52,41 @@ export class AppModule { }
 
 Once your library is imported, you can use its components in your Angular application:
 
-Add the `time-duration-picker` component to the page where you want to use the picker.
+Add the `time-duration-picker` component to the page where you want to use the picker, with disired Time unit `time-duration-picker-unit`.
 ```html
-<time-duration-picker [inputDisabled]=false units="Week | Day | Hour | Minute | Second | Millisecond" returnedValueUnit="Second" (onChange)="onNumberChanged($event)"></time-duration-picker>
+<time-duration-picker [inputDisabled]=false returnedValueUnit="second" (onChange)="onNumberChanged($event)" class="row">
+  <time-duration-picker-unit class="col-md-12" [name]="'second'"></time-duration-picker-unit>
+</time-duration-picker>
+
+```
+```html
+<time-duration-picker [inputDisabled]=false returnedValueUnit="hour" (onChange)="onNumberChanged($event)" class="row">
+  <time-duration-picker-unit class="col-md-2" [name]="'millisecond'" [label]="'Milliseconds'" [min]="0" [max]="999" [step]="1"></time-duration-picker-unit>
+  <time-duration-picker-unit class="col-md-2" [name]="'second'" [label]="'Seconds'" [min]="0" [max]="59" [step]="1"></time-duration-picker-unit>
+  <time-duration-picker-unit class="col-md-2" [name]="'minute'" [label]="'Minutes'" [min]="0" [max]="59" [step]="1"></time-duration-picker-unit>
+  <time-duration-picker-unit class="col-md-2" [name]="'hour'" [label]="'Hours'" [min]="0" [max]="23" [step]="1"></time-duration-picker-unit>
+  <time-duration-picker-unit class="col-md-2" [name]="'day'" [label]="'Days'" [min]="0" [max]="7" [step]="1"></time-duration-picker-unit>
+  <time-duration-picker-unit class="col-md-2" [name]="'week'" [label]="'Weeks'" [min]="0" [max]="51" [step]="1"></time-duration-picker-unit>
+</time-duration-picker>
 
 ```
 ## Field Schema
+`time-duration-picker`
 | Attribute        | Type           | Required  | Description |
 | :------------- |:-------------| :-----:| :-----|
-| units | [input] String | Yes | The units of the picker. pipe `|` seprated |
-| returnedValueUnit | [input] String | No | The unit of returned Value. second by default |
-inputDisabled | [input] Boolean | No | Defines if the input input should be disabled / editable by the user. true by default |
-| onChange | (output) Number | No | The onChange event of the component. Emits the value of the number picker, every time the user has clicked the - or + button. |
-## Development
-
-To generate all `*.js`, `*.js.map` and `*.d.ts` files:
-
-```bash
-$ npm run tsc
-```
-
-To lint all `*.ts` files:
-
-```bash
-$ npm run lint
-```
+| returnedValueUnit | [input] String | No | The unit of returned Value. default: `'second'` |
+| inputDisabled | [input] Boolean | No | Defines if the input input should be disabled / editable by the user. default: `true` |
+| onChange | (output) Number | No | The onChange event of the component. Emits the value of the picker every time the user has clicked the - or + button. |
+`time-duration-picker-unit`
+| Attribute        | Type           | Required  | Description |
+| :------------- |:-------------| :-----:| :-----|
+| name | [input] String | Yes | The units of the picker, supported values: `'week'`, `'day'`, `'hour'`, `'minute'`, `'second'` and `'millisecond'` |
+| label | [input] String | No | The label of the picker, default: name capitalized |
+| min | [input] number | No | The Minimum value can be set, default: 0 |
+| max | [input] number | No | The Maximum value can be set, default: (check the code) |
+| step | [input] number | No | The step value, default: 1 |
+| inputDisabled | [input] Boolean | No | Defines if the input input should be disabled / editable by the user. default: `true` |
+| onChange | (output) Number | No | The onChange event of the component. Emits the value of the picker every time the user has clicked the - or + button. |
 
 ## License
 

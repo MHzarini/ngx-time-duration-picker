@@ -1,87 +1,57 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ContentChildren, Component, QueryList, EventEmitter, Input, AfterContentInit, Output, Host, forwardRef, Inject, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+
+import { TimeDurationPickerUnitComponent } from "./time-duration-picker-unit.component";
 
 @Component({
 	selector: 'time-duration-picker',
 	template: `
-	<div class="row">
-    <div *ngFor="let unit of displayUnits" class="col-md-2 form-group">  
-      <table>
-				<tbody>
-					<tr class="text-center">
-						<td>
-							<button type="button" (click)="increaseValue(unit)" class="btn btn-link">
-								+
-							</button>
-						</td>
-					</tr>
-					<tr class="text-center">
-						<td class="input-group input-group-sm">
-							<input [(ngModel)]="unit.value" [disabled]="inputDisabled" class="form-control text-center" style="width:42px;"
-							(blur)="checkValue($event, unit)" type="number" min="{{unit.min}}" max="{{unit.max}}"/>  
-							<span class="input-group-addon" style="padding: 5px;">{{unit.label}}</span>
-						</td>
-					</tr>
-					<tr class="text-center">
-						<td>
-							<button type="button" (click)="decreaseValue(unit)" class="btn btn-link">
-							-
-							</button>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-    </div>
-	</div>
+	<ng-content></ng-content>
   `,
-	styles: [`
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-      -webkit-appearance: none; 
-      margin: 0; 
-    }
-    input[type=number] {
-      text-align: center;
-    }
-  `]
+	styles: []
 })
-export class TimeDurationPickerComponent implements OnInit {
+export class TimeDurationPickerComponent implements AfterContentInit {
 	supportedUnits: any = {
 		millisecond: {
 			'label': 'Millisecond',
-			'max': 99,
+			'max': 999,
 			'min': 0,
-			'value': 0
+			'value': 0,
+			'step': 1
 		},
 		second: {
 			'label': 'Second',
 			'max': 59,
 			'min': 0,
-			'value': 0
+			'value': 0,
+			'step': 1
 		},
 		minute: {
 			'label': 'Minute',
 			'max': 59,
 			'min': 0,
-			'value': 0
+			'value': 0,
+			'step': 1
 		},
 		hour: {
 			'label': 'Hour',
 			'max': 23,
 			'min': 0,
-			'value': 0
+			'value': 0,
+			'step': 1
 		},
 		day: {
 			'label': 'Day',
 			'max': 7,
 			'min': 0,
-			'value': 0
+			'value': 0,
+			'step': 1
 		},
 		week: {
 			'label': 'Week',
 			'max': 51,
 			'min': 0,
-			'value': 0
+			'value': 0,
+			'step': 1
 		}
 	};
 	private convert: any = {
@@ -134,77 +104,24 @@ export class TimeDurationPickerComponent implements OnInit {
 			'millisecond': 1
 		}
 	};
-	displayUnits: any[] = [];
-	@Input() units: any;
 	@Input() returnedValueUnit: any;
 	@Input() inputDisabled: boolean;
 
 	@Output() onChange: EventEmitter<number> = new EventEmitter();
 
+	@ContentChildren(forwardRef(() => TimeDurationPickerUnitComponent)) units: QueryList<TimeDurationPickerUnitComponent>;
+
 	constructor() { }
 
-	ngOnInit() {
-		if (typeof this.units === 'string') {
-			this.units = this.units.split('|');
-		} else {
-			throw new Error('Unsupported units: ' + this.units);
-		}
-		const supportedUnitsNames = ['week', 'day', 'hour', 'minute', 'second', 'millisecond'];
-		for (var i = 0; i < this.units.length; i++) {
-			let element = this.units[i];
-			let trimedElement = element.trim().toLowerCase();
-			if (supportedUnitsNames.indexOf(trimedElement) === -1) {
-				throw new Error('Unsupported unit: ' + trimedElement);
-			}
-			this.supportedUnits[element.trim().toLowerCase()]['id'] = trimedElement;
-			this.displayUnits.push(this.supportedUnits[element.trim().toLowerCase()]);
-		}
-		this.returnedValueUnit = this.returnedValueUnit.trim().toLowerCase();
+	ngAfterContentInit() {
+		
 		if (!this.returnedValueUnit) {
 			this.returnedValueUnit = 'second';
 		}
-		if (supportedUnitsNames.indexOf(this.returnedValueUnit) === -1) {
-			throw new Error('Unsupported unit: ' + this.returnedValueUnit);
-		}
+		this.returnedValueUnit = this.returnedValueUnit.trim().toLowerCase();
 		if (this.inputDisabled == null) {
 			this.inputDisabled = true;
 		}
-	}
-
-	private increaseValue(unit: any): void {
-		let currentValue = unit.value;
-		if (currentValue < unit.max) {
-			currentValue = currentValue + 1;
-		} else {
-			currentValue = unit.min;
-		}
-		unit.value = currentValue;
-		this.updateValue();
-	}
-
-	private decreaseValue(unit: any): void {
-		let currentValue = unit.value;
-		if (currentValue > unit.min) {
-			currentValue = currentValue - 1;
-		} else {
-			currentValue = unit.max;
-		}
-		unit.value = currentValue;
-		this.updateValue();
-	}
-
-	private checkValue(event: any, unit: any) {
-		let currentValue = event.target.value;
-		if (currentValue < unit.min) {
-			currentValue = unit.min;
-		} else if (currentValue > unit.max) {
-			currentValue = unit.max;
-		}
-		if (currentValue !== parseInt(currentValue)) {
-			currentValue = Math.round(currentValue);
-		}
-		event.target.value = currentValue;
-		this.updateValue();
 	}
 
 	public updateValue() {
@@ -213,8 +130,8 @@ export class TimeDurationPickerComponent implements OnInit {
 
 	public getValue(): number {
 		let value = 0;
-		this.displayUnits.forEach(element => {
-			value += this.convert[element.id][this.returnedValueUnit] * element.value;
+		this.units.toArray().forEach(element => {
+			value += this.convert[element.name.toLocaleLowerCase()][this.returnedValueUnit] * element.getValue();
 		});
 		return value;
 	}
