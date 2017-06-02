@@ -4,20 +4,13 @@
   "description": "A generic time duration picker Angular 2+ component ",
   "main": "./dist/index.js",
   "scripts": {
-    "build": "ngc -p tsconfig.json",
-    "lint": "tslint src/*.ts",
-    "test": "tsc && karma start",
-    "prepublish": "tsc",
-    "tsc": "tsc"
+    "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MHzarini/angular2-time-duration-picker"
+    "url": "git+https://github.com/MHzarini/angular2-time-duration-picker.git"
   },
-  "author": {
-    "name": "Mohammad Nuairat",
-    "email": "mhn.zarini@gmail.com"
-  },
+  "author": "Mohammad Nuairat <mhn.zarini@gmail.com>",
   "keywords": [
     "Angular",
     "Library",
@@ -62,5 +55,9 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
+  },
+  "homepage": "https://github.com/MHzarini/angular2-time-duration-picker#readme",
+  "directories": {
+    "doc": "docs"
   }
 }
