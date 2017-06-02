@@ -70,14 +70,13 @@ Add the `time-duration-picker` component to the page where you want to use the p
 </time-duration-picker>
 
 ```
-## Field Schema
-* `time-duration-picker`: 
+## `time-duration-picker` Field Schema
 | Attribute        | Type           | Required  | Description |
 | :------------- |:-------------| :-----:| :-----|
 | returnedValueUnit | [input] String | No | The unit of returned Value. default: `'second'` |
 | inputDisabled | [input] Boolean | No | Defines if the input input should be disabled / editable by the user. default: `true` |
 | onChange | (output) Number | No | The onChange event of the component. Emits the value of the picker every time the user has clicked the - or + button. |
-* `time-duration-picker`: 
+## `time-duration-picker-unit` Field Schema
 | Attribute        | Type           | Required  | Description |
 | :------------- |:-------------| :-----:| :-----|
 | name | [input] String | Yes | The units of the picker, supported values: `'week'`, `'day'`, `'hour'`, `'minute'`, `'second'` and `'millisecond'` |
