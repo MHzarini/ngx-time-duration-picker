@@ -1,6 +1,6 @@
-import { ContentChildren, Component, QueryList, EventEmitter, Input, AfterContentInit, Output, Host, forwardRef, Inject, ContentChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { ContentChildren, Component, QueryList, EventEmitter, Input, AfterContentInit, Output, forwardRef } from '@angular/core';
 
-import { TimeDurationPickerUnitComponent } from "./time-duration-picker-unit.component";
+import { TimeDurationPickerUnitComponent } from './time-duration-picker-unit.component';
 
 @Component({
 	selector: 'time-duration-picker',
@@ -114,7 +114,6 @@ export class TimeDurationPickerComponent implements AfterContentInit {
 	constructor() { }
 
 	ngAfterContentInit() {
-		
 		if (!this.returnedValueUnit) {
 			this.returnedValueUnit = 'second';
 		}

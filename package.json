@@ -1,13 +1,14 @@
 {
   "name": "angular2-time-duration-picker",
   "version": "0.2.0",
+  "description": "A generic time duration picker Angular 2+ component ",
+  "main": "./dist/index.js",
   "scripts": {
-    "lint": "tslint --force \"src/**/*.ts\"",
-    "pretest": "npm run lint",
-    "test": "karma start",
-    "posttest": "remap-istanbul -i coverage/json/coverage-final.json -o coverage/html -t html",
-    "test-watch": "karma start --no-single-run --auto-watch",
-    "build": "rimraf dist && ngc -p src/tsconfig.aot.json && gulp"
+    "build": "ngc -p tsconfig.json",
+    "lint": "tslint src/*.ts",
+    "test": "tsc && karma start",
+    "prepublish": "tsc",
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -31,13 +32,11 @@
   "bugs": {
     "url": "https://github.com/MHzarini/angular2-time-duration-picker/issues"
   },
-  "main": "./dist/index.js",
   "dependencies": {
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
     "@angular/forms": "^4.0.0",
-    "@angular/http": "^4.0.0",
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
@@ -63,8 +62,5 @@
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"
-  },
-  "engines": {
-    "node": ">=0.8.0"
   }
 }

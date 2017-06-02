@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, Host, Inject, forwardRef, } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Host, Inject, forwardRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { TimeDurationPickerComponent } from './time-duration-picker.component';
@@ -63,7 +63,7 @@ export class TimeDurationPickerUnitComponent implements OnInit {
 	ngOnInit() {
 		this.name = this.name.toLocaleLowerCase();
 		const supportedUnitsNames = Object.keys(this.timeDurationPicker.supportedUnits);
-		if (supportedUnitsNames.indexOf(this.name) == -1) {
+		if (supportedUnitsNames.indexOf(this.name) === -1) {
 			throw new Error('Unsupported unit: ' + this.name);
 		}
 		if (this.label == null) {
