@@ -111,7 +111,7 @@ export class NgxTimeDurationPickerUnitComponent implements OnInit {
   }
 
   checkValue(event: any) {
-    let currentValue = event.target.value;
+    let currentValue = parseInt(event.target.value);
     if (currentValue < this.min) {
       currentValue = this.min;
     } else if (currentValue > this.max) {
@@ -121,6 +121,7 @@ export class NgxTimeDurationPickerUnitComponent implements OnInit {
       currentValue = Math.round(currentValue);
     }
     event.target.value = currentValue;
+    this.value = currentValue;
     this.updateValue();
   }
 

@@ -8,7 +8,7 @@
 
 <h2>a demo app using for Angular 2+ ngx-time-duration-picker component (v2), a generic time duration picker Angular componen: </h2>
 
-<ngx-time-duration-picker returnedValueUnit="hour" (OnChange)="onValueChanged($event)">
+<ngx-time-duration-picker [inputDisabled]="false" returnedValueUnit="hour" (OnChange)="onValueChanged($event)">
   <ngx-time-duration-picker-unit name="millisecond" min="0" max="999" step="1"></ngx-time-duration-picker-unit>
   <ngx-time-duration-picker-unit name="second" min="0" max="60" step="1"></ngx-time-duration-picker-unit>
   <ngx-time-duration-picker-unit name="minute" min="0" max="60" step="1"></ngx-time-duration-picker-unit>
