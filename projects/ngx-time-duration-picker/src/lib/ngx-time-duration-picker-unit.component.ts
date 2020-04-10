@@ -5,7 +5,7 @@ import { NgxTimeDurationPickerComponent } from './ngx-time-duration-picker.compo
   selector: 'ngx-time-duration-picker-unit',
   template: `
   <div class="flex-container">
-    <a (click)="increaseValue()">
+    <a (mousedown)="increaseValue()" long-press  (onLongPressing)="longIncreaseValue()">
       &#708;
     </a>
     <div>
@@ -13,7 +13,7 @@ import { NgxTimeDurationPickerComponent } from './ngx-time-duration-picker.compo
       (blur)="checkValue($event)" type="number" min="{{min}}" max="{{max}}"/>
       <span *ngIf="label">{{label}}</span>
     </div>
-    <a (click)="decreaseValue()">
+    <a (mousedown)="decreaseValue()" long-press  (onLongPressing)="longDecreaseValue()">
       &#709;
     </a>
 	</div>
@@ -56,6 +56,8 @@ export class NgxTimeDurationPickerUnitComponent implements OnInit {
   @Output() OnChange: EventEmitter<number>;
 
   value: number;
+  //this variable will be increasing as the user long presses
+  stepVal: number = 1;
 
   constructor(@Host() @Inject(forwardRef(() => NgxTimeDurationPickerComponent)) public timeDurationPicker: NgxTimeDurationPickerComponent) {
     this.OnChange = new EventEmitter();
@@ -133,4 +135,42 @@ export class NgxTimeDurationPickerUnitComponent implements OnInit {
   public getValue(): number {
     return this.value;
   }
+
+  longIncreaseValue() {
+    let currentValue = this.value;
+    if (currentValue+this.stepVal <= this.max) {
+      currentValue = +currentValue + this.stepVal;
+    }
+    else{
+      currentValue = this.max;
+    }
+    if (this.stepVal < 100)
+    {
+      this.stepVal += 1;
+    }
+    else {
+      this.stepVal = 100;
+    }
+    this.value = currentValue;
+    this.updateValue();
+  }
+
+  longDecreaseValue() {
+    let currentValue = this.value;
+    if (currentValue - this.stepVal >= this.min) {
+      currentValue = +currentValue - this.stepVal;
+    }
+    else{
+      currentValue = this.min;
+    }
+    if (this.stepVal > 1){
+      this.stepVal -= 1;
+    }
+    else{
+      this.stepVal = 1;
+    }  
+    this.value = currentValue;
+    this.updateValue();
+  }
+
 }
